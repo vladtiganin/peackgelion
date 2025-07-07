@@ -15,17 +15,21 @@ class Dialog:
         self.background_color = pygame.Color(255, 195, 27)
         self.border_color = pygame.Color(230, 169, 0)
         self.text_color = pygame.Color('black')
-        self.text_font = pygame.font.SysFont('Arial', 20)
+        self.text_font = pygame.font.SysFont('Arial', 15)
+
+        self.menu_font = pygame.font.Font(None, 20)
+        self.menu_text = self.menu_font.render('Menu', True, 'black')
+        self.menu_rect =  self.menu_text.get_rect(bottomright = (120, self.window.get_height() - 30))
 
 
-    def activate(self): 
-        self.activate = True
-        return True
+    # def activate(self): 
+    #     self.activate = True
+    #     return True
     
 
-    def diactivate(self): 
-        self.activate = False
-        return False
+    # def diactivate(self): 
+    #     self.activate = False
+    #     return False
 
 
     def draw(self):
@@ -50,3 +54,14 @@ class Dialog:
 
             self.window.blit(word , (curentXpos, currentYpos))
             curentXpos += word.get_width()
+
+        
+
+        self.window.blit(self.menu_text, self.menu_rect)  
+
+        mouseX, mouseY = pygame.mouse.get_pos()
+        if self.menu_rect.collidepoint((mouseX, mouseY)):
+            border_rect = self.menu_rect.inflate(10, 10)
+            pygame.draw.rect(self.window, pygame.Color('black'), border_rect, 3)
+            return True
+        return False
