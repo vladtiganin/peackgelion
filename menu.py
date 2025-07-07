@@ -4,22 +4,31 @@ class Menu:
     def __init__(self,window, *args):
         self.points = args
         self.window = window
-        self.itemFont = pygame.font.Font(None, 40)
-        self.selectFont = pygame.font.Font(None, 55)
+        self.itemFont = pygame.font.Font('static/fonts/main_font.otf', 40)
+        self.selectFont_1 = pygame.font.Font('static/fonts/main_font.otf', 55)
+        self.selectFont_2 = pygame.font.Font('static/fonts/main_font.otf', 45)
         self.select = 0
         self.timer = 0
         self.selectAdd = 0
         self.timer = 0
+        self.imgBG = pygame.image.load('static/photo/bg_menu.jpg')
+        self.imgBG = pygame.transform.scale(self.imgBG, (self.window.get_width(), self.window.get_height()))
 
 
     def draw(self):
+        self.window.blit(self.imgBG, (0, 0))
         self.timer = (self.timer + 1) % 60
         for i in range(len(self.points)):
-            if i == self.select and self.timer < 30:
-                text = self.selectFont.render(self.points[i], 1, (255, 179, 179))
+            if i == self.select:
+                if self.timer < 30:
+                    text = self.selectFont_1.render(self.points[i], 1, (255, 179, 179))
+                else:
+                    text = self.selectFont_2.render(self.points[i], 1, (255, 179, 179))
             else:
                 text = self.itemFont.render(self.points[i], 1, (201, 141, 255))
-            rect = text.get_rect(center = (self.window.get_width() // 2, 100 + 50 * i))
+            posX = self.window.get_width() // 2
+            posY = self.window.get_height() // 2 - 150 + 50 * i
+            rect = text.get_rect(center = (posX, posY))
             self.window.blit(text, rect)
 
 

@@ -19,10 +19,10 @@ def change_state(input_data):
             print(game_state)
 
 
-# info = pygame.display.Info()
-# WIDTH, HEIGHT = info.current_w, info.current_h
-WIDTH, HEIGHT = 800, 600
-window = pygame.display.set_mode((WIDTH, HEIGHT))
+info = pygame.display.Info()
+WIDTH, HEIGHT = info.current_w, info.current_h
+# WIDTH, HEIGHT = 800, 600
+window = pygame.display.set_mode((WIDTH, HEIGHT), pygame.FULLSCREEN)
 clock = pygame.time.Clock()
 FPS = 60
 
@@ -62,9 +62,7 @@ while play:
                 case 'game_process':
                     pass
                 case 'cutscene':
-                    dialog = Dialog(window, "Longer paragraph to test word wrapping and text formatting capabilities." \
-                                            "The rain in Spain stays mainly in the plain. How now brown cow. She sells " \
-                                            "seashells by the seashore.Final line with punctuation! Question? Yes. Done.")
+                    dialog = Dialog(window, 'Please, eat my horny pussy...')
                     is_left_button_press = dialog.draw()
                     if is_left_button_press and mouse_clicked:
                         game_state = 'menu'

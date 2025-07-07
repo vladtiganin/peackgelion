@@ -15,11 +15,15 @@ class Dialog:
         self.background_color = pygame.Color(255, 195, 27)
         self.border_color = pygame.Color(230, 169, 0)
         self.text_color = pygame.Color('black')
-        self.text_font = pygame.font.SysFont('Arial', 15)
+        self.text_font = pygame.font.SysFont('static/fonts/main_font.otf', 37)
 
-        self.menu_font = pygame.font.Font(None, 20)
+        self.menu_font = pygame.font.Font('static/fonts/main_font.otf', 20)
         self.menu_text = self.menu_font.render('Menu', True, 'black')
         self.menu_rect =  self.menu_text.get_rect(bottomright = (120, self.window.get_height() - 30))
+
+        self.imgBG = pygame.image.load('static/photo/bg_dialog_1.jpg')
+        self.imgBG = pygame.transform.scale(self.imgBG, (self.window.get_width(), self.window.get_height()))
+
 
 
     # def activate(self): 
@@ -35,9 +39,16 @@ class Dialog:
     def draw(self):
         if not self.active: return
 
-        
+        self.window.blit(self.imgBG, (0, 0)) 
+
+        self.imgMisato = pygame.image.load('static/photo/misato_ready.png')
+        rect = self.imgMisato.get_rect(center = (self.window.get_width() // 8 * 6, self.window.get_height() // 5 * 3)) 
+        self.window.blit(self.imgMisato, rect)
+
         pygame.draw.rect(self.window, self.background_color, (self.x, self.y, self.width, self.height))
-        pygame.draw.rect(self.window, self.border_color, (self.x - 4, self.y - 4, self.width + 8, self.height + 8), 4)
+        pygame.draw.rect(self.window, self.border_color, (self.x - 8, self.y - 8, self.width + 16, self.height + 16), 4)
+        pygame.draw.rect(self.window, 'black', (self.x - 4, self.y - 4, self.width + 8, self.height + 8), 4)
+
 
         text_x = self.x + 30
         text_y = self.y + 15
