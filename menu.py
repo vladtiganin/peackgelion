@@ -24,6 +24,7 @@ class Menu:
 
 
     def event_handler(self, event):
+        print(f"Key pressed: {event.key}")  # Проверьте, что K_RETURN/K_SPACE срабатывают
         global play
         if event.key == pygame.K_UP: self.selectAdd -= 1
         if event.key == pygame.K_DOWN: self.selectAdd += 1 
@@ -36,6 +37,6 @@ class Menu:
         self.selectAdd = 0
 
         if event.key in [pygame.K_RETURN, pygame.K_SPACE]:
-            if self.points[self.select] == "exit": play = False
-            if self.points[self.select] == "info": print("peackgelion beta")
-            if self.points[self.select] == "start": print("in progress")
+            if self.points[self.select] == "exit": return 'exit'
+            if self.points[self.select] == "info": return 'peackgelion beta'
+            if self.points[self.select] == "start": return 'in progress'
