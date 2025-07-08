@@ -8,6 +8,10 @@ from random import randint
 
 pygame.init()
 
+pygame.mixer.init()
+# pygame.mixer.music.play(-1)
+# pygame.mixer.music.set_volume(0.5)
+# pygame.mixer.music.unpause()
 
 info = pygame.display.Info()
 WIDTH, HEIGHT = info.current_w, info.current_h
@@ -22,6 +26,8 @@ space_clicked = False
 game_state = 'menu'
 game_phase = ''
 game_type = 'speed_typing'
+is_music_playing = False
+music_maker = ''
 current_dialog = None
 menu = Menu(window, 'start', 'info', 'save/load', '' , 'exit')
 Misato = Character('Misato', (222, 167, 255, 200), (209, 131, 255, 255), pygame.image.load('static/photo/misato_ready.png'), (WIDTH // 2, HEIGHT // 5 * 3))
@@ -32,25 +38,57 @@ input_word = ''
 typing = Speed_Typing(window)
 
 
+
+# def play_menu_music():
+#     pygame.mixer.init()
+#     pygame.mixer.music.load('static/music/opening.mp3')
+#     pygame.mixer.music.play(-1)
+#     pygame.mixer.music.set_volume(0.5)
+
 def change_state(input_data):
     global game_state
     global play
-    global game_phase
+    global game_phase, is_music_playing
     print (input_data)
     match input_data:
         case 'exit':
             play = False
+            pygame.mixer.music.pause()
+            is_music_playing = False
         case 'start':
             game_state = 'game'
             game_phase = 'cutscene'
+            pygame.mixer.music.pause()
+            is_music_playing = False
         case 'info':
             game_state = 'info'
             print(game_state)
+            pygame.mixer.music.pause()
+            is_music_playing = False
+        
+    # pygame.mixer.music.pause()
+    # is_music_playing = False
+
+
+def music_turn_on(music_maker):
+    match music_maker:
+        case 'menu':
+            pygame.mixer.music.load('static/music/opening.mp3')
+        case 'cutscene':
+            pygame.mixer.music.load('static/music/cutscene.mp3')
+
+    pygame.mixer.music.play(-1)
+    pygame.mixer.music.set_volume(0.5)
+    pygame.mixer.music.unpause()
 
 def case_menu():
-    global game_state
-    if menu.draw():
-        game_state = 'menu'
+    global game_state, music_maker, is_music_playing
+    music_maker = 'menu'
+    if not is_music_playing:
+        music_turn_on(music_maker)
+        is_music_playing = True
+    menu.draw()
+    
 
 def case_game():
     global game_phase, game_state, game_type, space_clicked, input_word, mouse_clicked
@@ -77,7 +115,13 @@ def case_speed_typing():
             case 'menu':
                 if mouse_clicked:
                     game_state = 'menu'
+                    game_phase = 'cutscene'
+                    current_dialog.current_pos = 0
                     typing.reset()
+            case 'again':
+                if mouse_clicked:
+                    typing.reset()
+                    input_word = ''
     else:
         match typing.play(input_word.lower()):
             case True:
@@ -88,15 +132,26 @@ def case_speed_typing():
             case _ : pass
     
 def case_cutscene():
-    global game_phase, game_state, game_type, space_clicked, input_word, mouse_clicked
+    global game_phase, game_state, game_type, space_clicked, input_word, mouse_clicked, music_maker, is_music_playing
+
+    music_maker = 'cutscene'
+    if not is_music_playing:
+        music_turn_on(music_maker)
+        is_music_playing = True
+
+
     is_menu_press = current_dialog.draw()
     if is_menu_press and mouse_clicked:
         game_state = 'menu'
+        pygame.mixer.music.pause()
+        is_music_playing = False
     if space_clicked:
         if current_dialog.next():
             space_clicked = False
         else:
             game_phase = 'game_process'
+            pygame.mixer.music.pause()
+            is_music_playing = False
 
 
 

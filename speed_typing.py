@@ -144,7 +144,7 @@ class Speed_Typing:
                 pygame.draw.rect(self.window, pygame.Color('white'), self.menu_rect.inflate(10, 10), 3, 5)
                 to_return = 'menu'
 
-            return to_return
+            if to_return != None: return to_return
         
         else:
             to_return = None
@@ -180,7 +180,8 @@ class Speed_Typing:
                 pygame.draw.rect(self.window, pygame.Color('white'), self.menu_rect.inflate(10, 10), 3, 5)
                 to_return = 'menu'
             
-            return to_return
+            if to_return != None: return to_return
+            
 
 
     def reset(self):
