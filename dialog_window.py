@@ -23,6 +23,7 @@ class Dialog:
 
         self.text_font = pygame.font.Font('static/fonts/main_font.otf', 37)
         self.menu_font = pygame.font.Font('static/fonts/main_font.otf', 20)
+        self.name_font = pygame.font.Font('static/fonts/main_font.otf', 50)
         self.menu_text = self.menu_font.render('Menu', True, 'black')
         self.menu_rect = self.menu_text.get_rect(bottomright=(140, self.window.get_height() - 30))
 
@@ -82,7 +83,7 @@ class Dialog:
         #self.dialog_surface.fill((0, 0, 0, 0))
         current_girl = self.define_girl()
 
-        girl_rect = current_girl.img.get_rect(center=(self.window.get_width() // 8 * 6, self.window.get_height() // 5 * 3))
+        girl_rect = current_girl.img.get_rect(center=(current_girl.position))
         self.window.blit(current_girl.img, girl_rect)
         pygame.draw.rect(self.dialog_surface, current_girl.background_color, (4, 4, self.width - 8, self.height - 8))
         pygame.draw.rect(self.dialog_surface, current_girl.border_color, (0, 0, self.width, self.height), 4)
@@ -92,8 +93,13 @@ class Dialog:
         #character = self.dir[self.current_pos]['character'] 
         text = self.dir[self.current_pos]['text']
 
+        current_name = self.name_font.render(current_girl.name + ':', True, 'black')
+        name_rect = current_name.get_rect(topleft = (self.x + 30, self.y + 15))
+        self.window.blit(current_name, name_rect)
+
+
         text_x = self.x + 30
-        text_y = self.y + 15
+        text_y = self.y + 75
         current_x = text_x
         current_y = text_y
 
@@ -105,7 +111,7 @@ class Dialog:
                 current_x = text_x
             self.window.blit(word_surface, (current_x, current_y))
             current_x += word_surface.get_width()
-            
+
         self.window.blit(self.menu_text, self.menu_rect)
     
         mouse_pos = pygame.mouse.get_pos()
