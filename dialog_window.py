@@ -15,10 +15,8 @@ class Dialog:
         self.active = True
         self.current_pos = 0
 
-
         self.dialog_surface = pygame.Surface((self.width, self.height), pygame.SRCALPHA)
         
-
         # self.background_color = (255, 195, 27, 200)  
         # self.border_color = (224, 120, 0, 255)       
         self.text_color = (0, 0, 0, 255)             
@@ -26,7 +24,7 @@ class Dialog:
         self.text_font = pygame.font.Font('static/fonts/main_font.otf', 37)
         self.menu_font = pygame.font.Font('static/fonts/main_font.otf', 20)
         self.menu_text = self.menu_font.render('Menu', True, 'black')
-        self.menu_rect = self.menu_text.get_rect(bottomright=(120, self.window.get_height() - 30))
+        self.menu_rect = self.menu_text.get_rect(bottomright=(140, self.window.get_height() - 30))
 
 
         self.imgBG = pygame.image.load('static/photo/bg_dialog_1.jpg')
@@ -107,11 +105,12 @@ class Dialog:
                 current_x = text_x
             self.window.blit(word_surface, (current_x, current_y))
             current_x += word_surface.get_width()
+            
         self.window.blit(self.menu_text, self.menu_rect)
     
         mouse_pos = pygame.mouse.get_pos()
         if self.menu_rect.collidepoint(mouse_pos):
-            pygame.draw.rect(self.window, pygame.Color('black'), self.menu_rect.inflate(10, 10), 3)
+            pygame.draw.rect(self.window, pygame.Color('black'), self.menu_rect.inflate(10, 10), 3, 5)
             return True
             
         

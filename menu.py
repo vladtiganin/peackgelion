@@ -34,7 +34,6 @@ class Menu:
 
     def event_handler(self, event):
         print(f"Key pressed: {event.key}")  # Проверьте, что K_RETURN/K_SPACE срабатывают
-        global play
         if event.key == pygame.K_UP: self.selectAdd -= 1
         if event.key == pygame.K_DOWN: self.selectAdd += 1 
 
