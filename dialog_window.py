@@ -3,7 +3,8 @@ import re
 import keyboard
 
 class Dialog:
-    def __init__(self, window, file_path):
+    def __init__(self, window, file_path, *girls):
+        self.Misato, self.Rei, self.Asuka = girls
         self.file_path = file_path
         self.dir = self.mk_dir(self.file_path)
         self.width = window.get_width() - 100
@@ -18,8 +19,8 @@ class Dialog:
         self.dialog_surface = pygame.Surface((self.width, self.height), pygame.SRCALPHA)
         
 
-        self.background_color = (255, 195, 27, 200)  
-        self.border_color = (224, 120, 0, 255)       
+        # self.background_color = (255, 195, 27, 200)  
+        # self.border_color = (224, 120, 0, 255)       
         self.text_color = (0, 0, 0, 255)             
 
         self.text_font = pygame.font.Font('static/fonts/main_font.otf', 37)
@@ -30,28 +31,25 @@ class Dialog:
 
         self.imgBG = pygame.image.load('static/photo/bg_dialog_1.jpg')
         self.imgBG = pygame.transform.scale(self.imgBG, (self.window.get_width(), self.window.get_height()))
-        self.imgMisato = pygame.image.load('static/photo/misato_ready.png')
-        self.imgRei = pygame.image.load('static/photo/rei_dress-up.png')
-        self.imgAsuka = pygame.image.load('static/photo/asuka_dress-up.png')
+        # self.imgMisato = pygame.image.load('static/photo/misato_ready.png')
+        # self.imgRei = pygame.image.load('static/photo/rei_dress-up.png')
+        # self.imgAsuka = pygame.image.load('static/photo/asuka_dress-up.png')
 
     def mk_dir(self, path):
-        """Читает и парсит файл с диалогом"""
         dialogue = []
         
         with open(path, 'r') as file:
             content = file.read()
             lines = content.split('\n')
             for line in lines:
-                    # 3. Убираем лишние пробелы и кавычки
                     line = line.strip().replace('character: ', '')
-                    if '; text: ' not in line:  # 4. Проверка формата
+                    if '; text: ' not in line:  
                         continue
                     
                     pair = line.split('; text: ')
-                    if len(pair) != 2:  # 5. Проверка количества элементов
+                    if len(pair) != 2:  
                         continue
                     
-                    # 6. Очищаем текст от кавычек если они есть
                     character = pair[0].strip()
                     text = pair[1].strip().strip('"')
                     
@@ -68,26 +66,32 @@ class Dialog:
         else: return False
 
 
+    def define_girl(self):
+        match self.dir[self.current_pos]['character']:
+            case 'Misato': return self.Misato
+            case 'Rei': return self.Rei
+            case 'Asuka': return self.Asuka
+
+
     def draw(self):
         if not self.active: 
             return False
 
-
         self.window.blit(self.imgBG, (0, 0))
-        misato_rect = self.imgMisato.get_rect(center=(self.window.get_width() // 8 * 6, self.window.get_height() // 5 * 3))
-        self.window.blit(self.imgMisato, misato_rect)
-
+        # misato_rect = self.imgMisato.get_rect(center=(self.window.get_width() // 8 * 6, self.window.get_height() // 5 * 3))
+        # self.window.blit(self.imgMisato, misato_rect)
 
         #self.dialog_surface.fill((0, 0, 0, 0))
-        
-        pygame.draw.rect(self.dialog_surface, self.background_color, (4, 4, self.width - 8, self.height - 8))
-        pygame.draw.rect(self.dialog_surface, self.border_color, (0, 0, self.width, self.height), 4)
-        
+        current_girl = self.define_girl()
 
+        girl_rect = current_girl.img.get_rect(center=(self.window.get_width() // 8 * 6, self.window.get_height() // 5 * 3))
+        self.window.blit(current_girl.img, girl_rect)
+        pygame.draw.rect(self.dialog_surface, current_girl.background_color, (4, 4, self.width - 8, self.height - 8))
+        pygame.draw.rect(self.dialog_surface, current_girl.border_color, (0, 0, self.width, self.height), 4)
+        
         self.window.blit(self.dialog_surface, (self.x, self.y))
 
-        #for line in self.dir:
-        character = self.dir[self.current_pos]['character'] 
+        #character = self.dir[self.current_pos]['character'] 
         text = self.dir[self.current_pos]['text']
 
         text_x = self.x + 30

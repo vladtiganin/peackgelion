@@ -1,5 +1,6 @@
 from dialog_window import Dialog
 from menu import Menu
+from character import Character
 import pygame
 pygame.init()
 
@@ -40,9 +41,11 @@ space_clicked = False
 game_state = 'menu'
 game_phase = ''
 current_dialog = None
-
 menu = Menu(window, 'start', 'info', '', 'exit')
-current_dialog = Dialog(window, 'static/data/introduction.txt')
+Misato = Character('Misato', (222, 167, 255, 200), (209, 131, 255, 255), pygame.image.load('static/photo/misato_ready.png'))
+Rei = Character('Rei', (148, 244, 255, 200), (59, 234, 255, 255), pygame.image.load('static/photo/rei_dress-up.png'))
+Asuka = Character('Asuka', (255, 113, 113, 200), (255, 63, 63, 255), pygame.image.load('static/photo/asuka_dress-up.png'))
+current_dialog = Dialog(window, 'static/data/introduction.txt', Misato, Rei, Asuka)
 
 
 
