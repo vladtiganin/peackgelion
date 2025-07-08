@@ -68,15 +68,13 @@ while play:
                     pass
                 case 'cutscene':
                     is_menu_press = current_dialog.draw()
-                    print(space_clicked)
-
                     if is_menu_press and mouse_clicked:
                         game_state = 'menu'
                     if space_clicked:
-                        print("current_dialog.current_pos = ", current_dialog.current_pos)
-                        print('current_dialog.dir = ', len(current_dialog.dir))
                         if current_dialog.next():
                             space_clicked = False
+                        else:
+                            game_phase = 'game_process'
         case 'settings':
             pass
         case 'save':
