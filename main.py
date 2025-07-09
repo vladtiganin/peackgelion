@@ -32,7 +32,7 @@ GAME_TYPE = ''
 IS_MUSIC_PLAYING = False
 MUSIC_MAKER = ''
 #CURRENT_DIALOG = None
-MENU = Menu(window, 'start', 'info', 'save/load', '' , 'exit')
+MENU = Menu(window, 'continue', 'info', 'save', '' , 'exit')
 Misato = Character('Misato', (222, 167, 255, 200), (209, 131, 255, 255), pygame.image.load('static/photo/misato.png'), (WIDTH // 2, HEIGHT // 5 * 4), (600, 1300))
 Rei = Character('Rei', (148, 244, 255, 200), (59, 234, 255, 255), pygame.image.load('static/photo/rei.png'), (WIDTH // 8 * 6.2, HEIGHT // 5 * 3.42),(485, 900))
 Asuka = Character('Asuka', (255, 113, 113, 200), (255, 63, 63, 255), pygame.image.load('static/photo/asuka.png'), (WIDTH // 8 * 1.5, HEIGHT // 5 * 3.8),(550, 1050))
@@ -44,6 +44,7 @@ ALPHA = 0
 FADE_SPEED = 10     
 FADE_STATE = "out"
 IS_BLACK_OUT = False
+RETURNED_UNIT = None
 
 
 # def play_menu_music():
@@ -132,7 +133,7 @@ def case_game():
                     case_cutscene()
 
 def case_end_game():
-    global GAME_PHASE, GAME_STATE, GAME_TYPE, SPACE_CLICKED, INPUT_WORD, MOUSE_CLICKED, TYPING_GAME, CURRENT_GAME_PROGRESS
+    global GAME_PHASE, GAME_STATE, GAME_TYPE, SPACE_CLICKED, INPUT_WORD, MOUSE_CLICKED, TYPING_GAME, CURRENT_GAME_PROGRESS, END_GAME
     if not END_GAME.active:
         returned = END_GAME.initialize()
         if returned == 'menu' and MOUSE_CLICKED:
@@ -144,14 +145,20 @@ def case_end_game():
         pass
 
     else:
-        returned = END_GAME.play()
-        match returned:
+        RETURNED_UNIT = END_GAME.play()
+        match RETURNED_UNIT:
             case 'menu':
                 if MOUSE_CLICKED:
                     GAME_PHASE = 'cutscene'
                     GAME_STATE = 'menu'
                     CURRENT_DIALOG.current_pos = 0  
                     END_GAME.reset()
+            # case 'select':
+            #     if MOUSE_CLICKED:
+            #         END_GAME.select = True
+            # case _ : 
+            #     END_GAME.select = False
+                
 
 
 def case_speed_typing():
@@ -242,6 +249,9 @@ while play:
         if GAME_STATE == 'menu' and event.type == pygame.KEYDOWN: change_state(MENU.event_handler(event))
         if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1: MOUSE_CLICKED = True 
         else : MOUSE_CLICKED = False
+        if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1 and GAME_STATE == 'game' and GAME_PHASE == 'game_process' and GAME_TYPE == 'end_game' and END_GAME.active == True: 
+            END_GAME.check_for_select()
+
         if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE: SPACE_CLICKED = True
         if event.type == pygame.KEYDOWN and GAME_PHASE == 'game_process' and not TYPING_GAME.active: TYPING_GAME.active = True
         if event.type == pygame.KEYDOWN and GAME_PHASE == 'game_process' and not END_GAME.active: END_GAME.active = True

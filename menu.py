@@ -47,4 +47,4 @@ class Menu:
         if event.key in [pygame.K_RETURN, pygame.K_SPACE]:
             if self.points[self.select] == "exit": return 'exit'
             if self.points[self.select] == "info": return 'info'
-            if self.points[self.select] == "start": return 'start'
+            if self.points[self.select] == "continue": return 'start'
