@@ -114,7 +114,7 @@ class Speed_Typing:
     
 
     def end_window(self):
-        if self.score <= -20:
+        if self.score <= 20:
             to_return = None
 
             font_main = pygame.font.Font('static/fonts/main_font.otf', 70)
@@ -191,4 +191,3 @@ class Speed_Typing:
         self.game_end = False
         self.dasplay_timer = 30
         self.active = False
-

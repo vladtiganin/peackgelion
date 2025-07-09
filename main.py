@@ -2,6 +2,7 @@ from dialog_window import Dialog
 from menu import Menu
 from character import Character
 from speed_typing import Speed_Typing
+from end_game import End_Game
 import pygame
 from random import randint
 
@@ -27,7 +28,7 @@ MOUSE_CLICKED = False
 SPACE_CLICKED = False
 GAME_STATE = 'menu'
 GAME_PHASE = ''
-GAME_TYPE = 'speed_typing'
+GAME_TYPE = ''
 IS_MUSIC_PLAYING = False
 MUSIC_MAKER = ''
 #CURRENT_DIALOG = None
@@ -38,6 +39,7 @@ Asuka = Character('Asuka', (255, 113, 113, 200), (255, 63, 63, 255), pygame.imag
 CURRENT_DIALOG = Dialog(window,CURRENT_GAME_PROGRESS, Misato, Rei, Asuka)
 INPUT_WORD = ''
 TYPING_GAME = Speed_Typing(window)
+END_GAME = End_Game(window)
 ALPHA = 0          
 FADE_SPEED = 10     
 FADE_STATE = "out"
@@ -124,9 +126,14 @@ def case_game():
                     match GAME_TYPE:
                         case 'speed_typing':
                             case_speed_typing()
+                        case 'end_game':
+                            case_end_game()
                 case 'cutscene':
                     case_cutscene()
-                        
+
+def case_end_game():
+    END_GAME.initialize()
+
 def case_speed_typing():
     global GAME_PHASE, GAME_STATE, GAME_TYPE, SPACE_CLICKED, INPUT_WORD, MOUSE_CLICKED, TYPING_GAME, CURRENT_GAME_PROGRESS
     if not TYPING_GAME.active:
@@ -189,16 +196,21 @@ def case_cutscene():
             SPACE_CLICKED = False
         else:
             GAME_PHASE = 'game_process'
+            define_game()
             pygame.mixer.music.pause()
             IS_MUSIC_PLAYING = False
 
+def define_game():
+    global GAME_TYPE
+    match CURRENT_GAME_PROGRESS:
+        case 0: GAME_TYPE = 'speed_typing'
+        case 1: GAME_TYPE = 'end_game'
 
 
 '''
 game_state:     1) menu - на экране меню и там
                 2) game - сам игровой процесс
                 3) cutscene - катсцена
-                4) найстройки или меню сохранения надо придумать 
 '''
 
 
