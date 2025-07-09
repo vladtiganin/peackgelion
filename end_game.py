@@ -1,5 +1,6 @@
 import pygame
 from random import randint
+import time
 
 
 SKILLS = ('shield', 'laser', 'knife')
@@ -36,7 +37,12 @@ class End_Game:
 
         self.imgField = pygame.image.load('static/photo/at.png')
         self.imgField = pygame.transform.smoothscale(self.imgField, (400, 500))
+        self.imgField_Angel = pygame.image.load('static/photo/at_angel.png')
+        self.imgField_Angel = pygame.transform.smoothscale(self.imgField_Angel, (600, 800))
         self.player_need_shield = False
+        self.imgLaser = pygame.image.load('static/photo/laser(2).png')
+        # self.imgLaser = pygame.transform.smoothscale(self.imgLaser, (100, 200))
+        self.imgLaser = pygame.transform.rotate(self.imgLaser, -20)
         
         
 
@@ -96,14 +102,6 @@ class End_Game:
         pygame.draw.rect(self.window, 'green', (self.Eva_02.position[0] - 60, self.Eva_02.position[1] - 250, self.Eva_02.hp * 4, 25))
         pygame.draw.rect(self.window, 'black', (self.Eva_02.position[0] - 64, self.Eva_02.position[1] - 254, 168, 33), 4, 8)
 
-        if self.player_need_shield:
-            rect = self.imgField.get_rect(center = (self.Eva_00.position[0] + 100, self.Eva_00.position[1] + 30))
-            self.window.blit(self.imgField, rect)
-            rect = self.imgField.get_rect(center = (self.Eva_01.position[0] + 100, self.Eva_01.position[1] + 30))
-            self.window.blit(self.imgField, rect)
-            rect = self.imgField.get_rect(center = (self.Eva_02.position[0] + 100, self.Eva_02.position[1] + 30))
-            self.window.blit(self.imgField, rect)
-
         Angel_rect = self.Angel.img.get_rect(center = (self.Angel.position))
         self.window.blit(self.Angel.img, Angel_rect)
 
@@ -126,14 +124,29 @@ class End_Game:
                 self.players_steps -= 1
                 if self.players_steps == 0:
                     self.Angels_steps = 1
+
         elif self.Angels_steps == 1:
+            time.sleep(0.5)
             self.Angel.use_skill()
             self.Angels_steps -= 1
             self.players_steps += 2
-            
+            time.sleep(0.5)
+            self.player_need_shield = False
+
+        if self.player_need_shield:
+            rect = self.imgField.get_rect(center = (self.Eva_00.position[0] + 100, self.Eva_00.position[1] + 30))
+            self.window.blit(self.imgField, rect)
+            rect = self.imgField.get_rect(center = (self.Eva_01.position[0] + 100, self.Eva_01.position[1] + 30))
+            self.window.blit(self.imgField, rect)
+            rect = self.imgField.get_rect(center = (self.Eva_02.position[0] + 100, self.Eva_02.position[1] + 30))
+            self.window.blit(self.imgField, rect)
+
+        if self.Angel.need_shield:
+            rect = self.imgField_Angel.get_rect(center = (self.Angel.position[0] - 170, self.Angel.position[1] + 50))
+            self.window.blit(self.imgField_Angel, rect)
 
         return to_return
-        
+            
 
     def game_end(self):
         return False
@@ -159,7 +172,7 @@ class End_Game:
             case 'knife':
                 pass
             case 'laser':
-                pass
+                self.window.blit(self.imgLaser, (700, 700))
 
     def contains(point, rect):
         return rect.collidepoint(point)
@@ -180,10 +193,17 @@ class Enemy:
         self.attack_types = ['shield', 'attack']
         self.current_attack = None
         self.attack_power = 20
+        self.need_shield = False
 
     def use_skill(self):
         self.current_attack = self.attack_types[randint(0,1)]
         print(self.current_attack)
+
+        match self.current_attack:
+            case 'shield':
+                self.need_shield = True
+            case 'attack':
+                pass 
 
 class Unit:
     def __init__(self, position, img, skill):
