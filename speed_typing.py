@@ -6,7 +6,7 @@ class Speed_Typing:
         self.window = window
         self.active = False
         self.timer = 60
-        self.dasplay_timer = 5 # чтобы долго не ждать 
+        self.dasplay_timer = 30 # чтобы долго не ждать 
         self.words = ["shinji","rei","asuka","kaworu","gendo",
                       "misato","ritsuko","seele","lilith","adam",
                       "evangelion","lcl","angel","nerv",

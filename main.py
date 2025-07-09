@@ -30,12 +30,16 @@ is_music_playing = False
 music_maker = ''
 current_dialog = None
 menu = Menu(window, 'start', 'info', 'save/load', '' , 'exit')
-Misato = Character('Misato', (222, 167, 255, 200), (209, 131, 255, 255), pygame.image.load('static/photo/misato_ready.png'), (WIDTH // 2, HEIGHT // 5 * 3))
-Rei = Character('Rei', (148, 244, 255, 200), (59, 234, 255, 255), pygame.image.load('static/photo/rei_dress-up.png'), (WIDTH // 8 * 6, HEIGHT // 5 * 3))
-Asuka = Character('Asuka', (255, 113, 113, 200), (255, 63, 63, 255), pygame.image.load('static/photo/asuka_dress-up.png'), (WIDTH // 8 * 2, HEIGHT // 5 * 3))
+Misato = Character('Misato', (222, 167, 255, 200), (209, 131, 255, 255), pygame.image.load('static/photo/misato.png'), (WIDTH // 2, HEIGHT // 5 * 4), (600, 1300))
+Rei = Character('Rei', (148, 244, 255, 200), (59, 234, 255, 255), pygame.image.load('static/photo/rei.png'), (WIDTH // 8 * 6.2, HEIGHT // 5 * 3.42),(485, 900))
+Asuka = Character('Asuka', (255, 113, 113, 200), (255, 63, 63, 255), pygame.image.load('static/photo/asuka.png'), (WIDTH // 8 * 1.5, HEIGHT // 5 * 3.8),(550, 1050))
 current_dialog = Dialog(window, 'static/data/introduction.txt', Misato, Rei, Asuka)
 input_word = ''
 typing = Speed_Typing(window)
+alpha = 0          
+fade_speed = 10     
+fade_state = "out"
+is_black_out = False
 
 
 
@@ -44,6 +48,31 @@ typing = Speed_Typing(window)
 #     pygame.mixer.music.load('static/music/opening.mp3')
 #     pygame.mixer.music.play(-1)
 #     pygame.mixer.music.set_volume(0.5)
+
+
+def black_out():
+    global alpha, fade_speed, fade_state
+
+    fade_surface = pygame.Surface((WIDTH, HEIGHT))
+    fade_surface.fill('black')
+    fade_surface.set_alpha(alpha)
+
+    window.blit(fade_surface, (0, 0))
+
+    if fade_state == "out":
+        alpha += fade_speed
+        if alpha >= 255:
+            alpha = 255
+            fade_state = "in"  
+    elif fade_state == "in":
+        alpha -= fade_speed
+        if alpha <= 0:
+            alpha = 0
+            fade_state = "out"
+
+    print("black")
+    return alpha == 255
+
 
 def change_state(input_data):
     global game_state
@@ -69,7 +98,6 @@ def change_state(input_data):
     # pygame.mixer.music.pause()
     # is_music_playing = False
 
-
 def music_turn_on(music_maker):
     match music_maker:
         case 'menu':
@@ -89,7 +117,6 @@ def case_menu():
         is_music_playing = True
     menu.draw()
     
-
 def case_game():
     global game_phase, game_state, game_type, space_clicked, input_word, mouse_clicked
     match game_phase:
@@ -99,6 +126,7 @@ def case_game():
                             case_speed_typing()
                 case 'cutscene':
                     case_cutscene()
+                        
 
 def case_speed_typing():
     global game_phase, game_state, game_type, space_clicked, input_word, mouse_clicked, typing
@@ -145,6 +173,7 @@ def case_cutscene():
         game_state = 'menu'
         pygame.mixer.music.pause()
         is_music_playing = False
+        current_dialog.current_pos = 0
     if space_clicked:
         if current_dialog.next():
             space_clicked = False
@@ -182,7 +211,7 @@ while play:
             print(input_word)
 
 
-    window.fill(pygame.Color('black'))
+    #window.fill(pygame.Color('black'))
 
     match game_state:
         case 'menu':
