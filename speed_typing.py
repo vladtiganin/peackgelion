@@ -114,7 +114,7 @@ class Speed_Typing:
     
 
     def end_window(self):
-        if self.score <= 20:
+        if self.score <= -20:
             to_return = None
 
             font_main = pygame.font.Font('static/fonts/main_font.otf', 70)

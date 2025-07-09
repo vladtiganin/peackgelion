@@ -132,7 +132,27 @@ def case_game():
                     case_cutscene()
 
 def case_end_game():
-    END_GAME.initialize()
+    global GAME_PHASE, GAME_STATE, GAME_TYPE, SPACE_CLICKED, INPUT_WORD, MOUSE_CLICKED, TYPING_GAME, CURRENT_GAME_PROGRESS
+    if not END_GAME.active:
+        returned = END_GAME.initialize()
+        if returned == 'menu' and MOUSE_CLICKED:
+            GAME_PHASE = 'cutscene'
+            GAME_STATE = 'menu'
+            CURRENT_DIALOG.current_pos = 0
+
+    elif END_GAME.game_end():
+        pass
+
+    else:
+        returned = END_GAME.play()
+        match returned:
+            case 'menu':
+                if MOUSE_CLICKED:
+                    GAME_PHASE = 'cutscene'
+                    GAME_STATE = 'menu'
+                    CURRENT_DIALOG.current_pos = 0  
+                    END_GAME.reset()
+
 
 def case_speed_typing():
     global GAME_PHASE, GAME_STATE, GAME_TYPE, SPACE_CLICKED, INPUT_WORD, MOUSE_CLICKED, TYPING_GAME, CURRENT_GAME_PROGRESS
@@ -224,6 +244,7 @@ while play:
         else : MOUSE_CLICKED = False
         if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE: SPACE_CLICKED = True
         if event.type == pygame.KEYDOWN and GAME_PHASE == 'game_process' and not TYPING_GAME.active: TYPING_GAME.active = True
+        if event.type == pygame.KEYDOWN and GAME_PHASE == 'game_process' and not END_GAME.active: END_GAME.active = True
         if event.type == pygame.KEYDOWN and GAME_STATE == 'game' and GAME_PHASE == 'game_process' and GAME_TYPE == 'speed_typing': 
             if event.unicode.isalpha():
                 INPUT_WORD += event.unicode
