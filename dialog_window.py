@@ -3,10 +3,12 @@ import re
 import keyboard
 
 class Dialog:
-    def __init__(self, window, file_path, *girls):
+    def __init__(self, window, game_procress, *girls):
+        self.game_progress = game_procress
         self.Misato, self.Rei, self.Asuka = girls
-        self.file_path = file_path
-        self.dir = self.mk_dir(self.file_path)
+        self.file_path = None
+        self.update_file_path()
+        self.dir = self.mk_dir()
         self.width = window.get_width() - 100
         self.height = window.get_height() * 0.25
         self.x = (window.get_width() - self.width) // 2
@@ -34,7 +36,8 @@ class Dialog:
         # self.imgRei = pygame.image.load('static/photo/rei_dress-up.png')
         # self.imgAsuka = pygame.image.load('static/photo/asuka_dress-up.png')
 
-    def mk_dir(self, path):
+    def mk_dir(self):
+        path = self.file_path
         dialogue = []
         
         with open(path, 'r') as file:
@@ -57,6 +60,15 @@ class Dialog:
 
         return dialogue
             
+
+    def update_data(self):
+        self.update_file_path();
+        self.dir = self.mk_dir()
+
+
+    def update_file_path(self):
+        self.file_path = 'static/data/part_' + str(self.game_progress) + '.txt'
+
             
     def next(self):
         if self.current_pos < len(self.dir) -1: 

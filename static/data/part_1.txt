@@ -1,0 +1,13 @@
+character: Asuka; text: And this weakling will be the pilot of Eva 01?
+character: Asuka; text: I hope you don't run and cry to daddy in battle.
+character: Misato; text: And this is Asuka.
+character: Misato; text: Welcome to Tokyo-3, new Evangelion pilot.
+character: Misato; text: My name is Misato, I will be your mentor.
+character: Misato; text: Let me introduce you to your partners.
+character: Misato; text: Meet Ray.
+character: Rei; text: Nice to meet you.
+character: Misato; text: An Eva is a biological robot (or "artificial human") created to protect humanity from the Angels in the anime Evangelion. Each Eva is controlled by a pilot who synchronizes with its consciousness, and possesses immense power.
+character: Misato; text: Angels are mysterious, hostile beings that attack humanity in an attempt to reach "Lilith" or "Adam" to trigger "Third Impact" and change the world. Each Angel is unique, has powerful abilities, and poses a serious threat, forcing humans to rely on the Evangelions for protection.
+character: Misato; text: We are now in Tokyo-3.
+character: Misato; text: Tokyo-3 is a purpose-built fortress city in Evangelion that serves as humanity's last bastion against the Angels. It is equipped with retractable buildings, defensive weapons, and serves as NERV's main base from which Evangelion pilots repel enemy attacks.
+
