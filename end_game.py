@@ -40,9 +40,16 @@ class End_Game:
         self.imgField_Angel = pygame.image.load('static/photo/at_angel.png')
         self.imgField_Angel = pygame.transform.smoothscale(self.imgField_Angel, (600, 800))
         self.player_need_shield = False
+        self.is_laser_attack = False
+        self.is_knife_attack = False
+        self.laser_timer = 0
+        self.knife_timer = 0
         self.imgLaser = pygame.image.load('static/photo/laser(2).png')
         # self.imgLaser = pygame.transform.smoothscale(self.imgLaser, (100, 200))
-        self.imgLaser = pygame.transform.rotate(self.imgLaser, -20)
+        self.imgLaser = pygame.transform.rotate(self.imgLaser, -12)
+        self.imgKnife = pygame.image.load('static/photo/knife_in_hand.png')
+        self.imgKnife = pygame.transform.smoothscale(self.imgKnife, (90, 50))
+
         
         
 
@@ -90,11 +97,21 @@ class End_Game:
         pygame.draw.rect(self.window, 'green', (self.Eva_00.position[0] - 60, self.Eva_00.position[1] - 250, self.Eva_00.hp * 4, 25))
         pygame.draw.rect(self.window, 'black', (self.Eva_00.position[0] - 64, self.Eva_00.position[1] - 254, 168, 33), 4, 8)
 
-        Eva_01_rect = self.Eva_01.img.get_rect(center = (self.Eva_01.position))
-        self.window.blit(self.Eva_01.img, Eva_01_rect)
-        pygame.draw.rect(self.window, 'red', (self.Eva_01.position[0] - 60, self.Eva_01.position[1] - 250, 160, 25))
-        pygame.draw.rect(self.window, 'green', (self.Eva_01.position[0] - 60, self.Eva_01.position[1] - 250, self.Eva_01.hp * 4, 25))
-        pygame.draw.rect(self.window, 'black', (self.Eva_01.position[0] - 64, self.Eva_01.position[1] - 254, 168, 33), 4, 8)
+
+        if self.is_knife_attack:
+            self.knife_attack()
+            if self.knife_timer == 0:
+                self.is_knife_attack = False
+        else:
+            Eva_01_rect = self.Eva_01.img.get_rect(center = (self.Eva_01.position))
+            self.window.blit(self.Eva_01.img, Eva_01_rect)
+            knife_rect = self.imgKnife.get_rect(center = (self.Eva_01.position[0] - 20, self.Eva_01.position[1] + 14))
+            self.window.blit(self.imgKnife, knife_rect)
+            pygame.draw.rect(self.window, 'red', (self.Eva_01.position[0] - 60, self.Eva_01.position[1] - 250, 160, 25))
+            pygame.draw.rect(self.window, 'green', (self.Eva_01.position[0] - 60, self.Eva_01.position[1] - 250, self.Eva_01.hp * 4, 25))
+            pygame.draw.rect(self.window, 'black', (self.Eva_01.position[0] - 64, self.Eva_01.position[1] - 254, 168, 33), 4, 8)
+
+
 
         Eva_02_rect = self.Eva_02.img.get_rect(center = (self.Eva_02.position))
         self.window.blit(self.Eva_02.img, Eva_02_rect)
@@ -126,11 +143,11 @@ class End_Game:
                     self.Angels_steps = 1
 
         elif self.Angels_steps == 1:
-            time.sleep(0.5)
+            #time.sleep(0.5)
             self.Angel.use_skill()
             self.Angels_steps -= 1
             self.players_steps += 2
-            time.sleep(0.5)
+            #time.sleep(0.5)
             self.player_need_shield = False
 
         if self.player_need_shield:
@@ -145,9 +162,18 @@ class End_Game:
             rect = self.imgField_Angel.get_rect(center = (self.Angel.position[0] - 170, self.Angel.position[1] + 50))
             self.window.blit(self.imgField_Angel, rect)
 
+        if self.is_laser_attack:
+            self.laser_attack()
+            if self.laser_timer == 0:
+                self.is_laser_attack = False
+
+        # if self.is_knife_attack:
+        #     self.knife_attack()
+        #     if self.knife_timer == 0:
+        #         self.is_knife_attack = False
+
         return to_return
             
-
     def game_end(self):
         return False
     
@@ -164,18 +190,16 @@ class End_Game:
                 else:
                     self.select = False
 
-    
     def use_skill(self, unit):
         match unit.skill:
             case 'shield':
                 self.player_need_shield = True
             case 'knife':
-                pass
+                self.knife_timer = 60
+                self.is_knife_attack = True
             case 'laser':
-                self.window.blit(self.imgLaser, (700, 700))
-
-    def contains(point, rect):
-        return rect.collidepoint(point)
+                self.laser_timer = 15
+                self.is_laser_attack = True
     
     def reset(self):
         self.active = False
@@ -183,6 +207,31 @@ class End_Game:
         self.Angels_steps = 0
         print('reset')
 
+    def laser_attack(self):
+        startX, startY = self.Eva_02.position
+        stepX = (self.Angel.position[0] - self.Eva_02.position[0] - 150) / 15
+        stepY = (self.Angel.position[1] - self.Eva_02.position[1]) / 15
+        self.window.blit(self.imgLaser, (startX + stepX * (16 - self.laser_timer), startY + stepY * (16 - self.laser_timer)))
+        self.laser_timer -= 1
+
+    def knife_attack(self):
+        current_pos = None
+        if self.knife_timer > 30:
+            startX, startY = self.Eva_01.position[0],  self.Eva_01.position[1] - 190
+            stepX = (self.Angel.position[0] - self.Eva_01.position[0] - 250) / 30
+            #stepY = (self.Angel.position[1] - self.Eva_01.position[1] + 200) / 30
+            current_pos = ((startX + stepX * (61 - self.knife_timer), startY))
+            self.window.blit(self.Eva_01.img, current_pos)
+            self.window.blit(self.imgKnife, current_pos)
+            self.knife_timer -= 1
+        else:
+            startX, startY = self.Angel.position[0] - 100, self.Eva_01.position[1] - 190
+            stepX = -(self.Angel.position[0] - self.Eva_01.position[0] - 150) / 30
+            # stepY = -(self.Angel.position[1] - self.Eva_01.position[1] + 200) / 30
+            current_pos = ((startX + stepX * (31 - self.knife_timer), startY))
+            self.window.blit(self.Eva_01.img, current_pos)
+            self.window.blit(self.imgKnife, current_pos)
+            self.knife_timer -= 1
 
 class Enemy:
     def __init__(self, position, img):
