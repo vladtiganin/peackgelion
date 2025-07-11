@@ -48,3 +48,4 @@ class Menu:
             if self.points[self.select] == "exit": return 'exit'
             if self.points[self.select] == "info": return 'info'
             if self.points[self.select] == "continue": return 'start'
+            if self.points[self.select] == "new game": return 'new game'

@@ -22,6 +22,10 @@ class Speed_Typing:
         self.menu_rect = self.menu_text.get_rect(bottomright=(140, self.window.get_height() - 30))
         self.game_end = False
 
+        self.is_music_playing = False
+        self.congratulations = pygame.mixer.Sound('static/music/congratulations.wav')
+        self.lose_sound = pygame.mixer.Sound('static/music/lose.wav')
+
 
 
     def initialize(self):
@@ -114,8 +118,12 @@ class Speed_Typing:
     
 
     def end_window(self):
-        if self.score <= -20:
+        if self.score <= -60:
             to_return = None
+
+            if not self.is_music_playing:
+                self.lose_sound.play()
+                self.is_music_playing = True
 
             font_main = pygame.font.Font('static/fonts/main_font.otf', 70)
             start_text = font_main.render('Game over...', True, 'white')
@@ -148,6 +156,10 @@ class Speed_Typing:
         
         else:
             to_return = None
+
+            if not self.is_music_playing:
+                self.congratulations.play()
+                self.is_music_playing = True
 
             font_main = pygame.font.Font('static/fonts/main_font.otf', 70)
             start_text = font_main.render('You win!', True, 'white')
@@ -191,3 +203,4 @@ class Speed_Typing:
         self.game_end = False
         self.dasplay_timer = 30
         self.active = False
+        self.is_music_playing = False

@@ -1,6 +1,6 @@
 import pygame
 import re
-import keyboard
+from random import randint
 
 class Dialog:
     def __init__(self, window, game_procress, *girls):
@@ -30,17 +30,24 @@ class Dialog:
         self.menu_rect = self.menu_text.get_rect(bottomright=(140, self.window.get_height() - 30))
 
 
-        self.imgBG = pygame.image.load('static/photo/bg_dialog_1.jpg')
-        self.imgBG = pygame.transform.scale(self.imgBG, (self.window.get_width(), self.window.get_height()))
-        # self.imgMisato = pygame.image.load('static/photo/misato_ready.png')
-        # self.imgRei = pygame.image.load('static/photo/rei_dress-up.png')
-        # self.imgAsuka = pygame.image.load('static/photo/asuka_dress-up.png')
+        self.imgBG_1 = pygame.image.load('static/photo/bg_dialog_1.jpg')
+        self.imgBG_1 = pygame.transform.scale(self.imgBG_1, (self.window.get_width(), self.window.get_height()))
+        self.imgBG_2 = pygame.image.load('static/photo/bg_dialog_2.jpg')
+        self.imgBG_2 = pygame.transform.scale(self.imgBG_2, (self.window.get_width(), self.window.get_height()))
+        self.imgBG_3 = pygame.image.load('static/photo/bg_dialog_3.jpg')
+        self.imgBG_3 = pygame.transform.scale(self.imgBG_3, (self.window.get_width(), self.window.get_height()))
+        self.imgBG_0 = pygame.image.load('static/photo/bg_dialog_0.jpg')
+        self.imgBG_0 = pygame.transform.scale(self.imgBG_0, (self.window.get_width(), self.window.get_height()))
+
+        self.need_new_img = True
+        self.current_img = None
+
 
     def mk_dir(self):
         path = self.file_path
         dialogue = []
         
-        with open(path, 'r') as file:
+        with open(path, 'r', encoding='UTF-8') as file:
             content = file.read()
             lines = content.split('\n')
             for line in lines:
@@ -67,10 +74,12 @@ class Dialog:
 
 
     def update_file_path(self):
+        print(self.game_progress)
         self.file_path = 'static/data/part_' + str(self.game_progress) + '.txt'
 
             
     def next(self):
+        print("next")
         if self.current_pos < len(self.dir) -1: 
             self.current_pos += 1
             return True
@@ -88,15 +97,28 @@ class Dialog:
         if not self.active: 
             return False
 
-        self.window.blit(self.imgBG, (0, 0))
+        match self.game_progress:
+            case 0:
+                self.window.blit(self.imgBG_0, (0, 0))
+            case 1:
+                self.window.blit(self.imgBG_1, (0, 0))
+            case 2:
+                self.window.blit(self.imgBG_2, (0, 0))
+            case 3:
+                self.window.blit(self.imgBG_3, (0, 0))
+
         # misato_rect = self.imgMisato.get_rect(center=(self.window.get_width() // 8 * 6, self.window.get_height() // 5 * 3))
         # self.window.blit(self.imgMisato, misato_rect)
 
         #self.dialog_surface.fill((0, 0, 0, 0))
         current_girl = self.define_girl()
 
-        girl_rect = current_girl.img.get_rect(center=(current_girl.position))
-        self.window.blit(current_girl.img, girl_rect)
+        if self.need_new_img:
+            self.current_img = current_girl.imgs[randint(0,1)]['img']
+            self.need_new_img = False
+
+        girl_rect = self.current_img.get_rect(center=(current_girl.position))
+        self.window.blit(self.current_img, girl_rect)
         pygame.draw.rect(self.dialog_surface, current_girl.background_color, (4, 4, self.width - 8, self.height - 8))
         pygame.draw.rect(self.dialog_surface, current_girl.border_color, (0, 0, self.width, self.height), 4)
         

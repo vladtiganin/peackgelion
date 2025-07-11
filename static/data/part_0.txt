@@ -1,4 +1,5 @@
 character: Misato; text: Welcome to Tokyo-3, new Evangelion pilot.
+character: Misato; text: Welcome to Tokyo-3, new Evangelion pilot.
 character: Misato; text: My name is Misato, I will be your mentor.
 character: Misato; text: Let me introduce you to your partners.
 character: Misato; text: Meet Ray.
@@ -10,4 +11,42 @@ character: Misato; text: An Eva is a biological robot (or "artificial human") cr
 character: Misato; text: Angels are mysterious, hostile beings that attack humanity in an attempt to reach "Lilith" or "Adam" to trigger "Third Impact" and change the world. Each Angel is unique, has powerful abilities, and poses a serious threat, forcing humans to rely on the Evangelions for protection.
 character: Misato; text: We are now in Tokyo-3.
 character: Misato; text: Tokyo-3 is a purpose-built fortress city in Evangelion that serves as humanity's last bastion against the Angels. It is equipped with retractable buildings, defensive weapons, and serves as NERV's main base from which Evangelion pilots repel enemy attacks.
+character: Misato; text: And now it's your home.
+character: Misato; text: And you have to protect him, even at the cost of your life.
+character: Misato; text: After all, you have been given a great honor. Right now, only the three of you can save our Tokyo 3 and the whole world.
+character: Misato; text: But don't worry, we're all one big family here and we'll never leave each other in a fight.
+character: Asuka; text: I wish I could say the same about him.
+character: Asuka; text: Daddy's son has arrived and everyone has to kiss his ass.
+character: Asuka; text: Just so you know.
+character: Asuka; text: I'm not like that.
+character: Asuka; text: I don't need a team, I can handle all the angels on my own.
+character: Asuka; text: So in a fight, you better not stick your ass any further than mine.
+character: Misato; text: Asuka, stop it right now!
+character: Misato; text: The fact that your test scores are slightly better doesn't mean anything.
+character: Misato; text: Don't listen to her.
+character: Misato; text: She's a good girl, give her some time to get used to you.
+character: Misato; text: And what will our quiet one tell us?
+character: Misato; text: By the way, she is closely acquainted with your father.
+character: Rei; text: I am very pleased to meet Gendo's son.
+character: Rei; text: Gendo said you were coming, but he didn't answer any questions about you.
+character: Rei; text: It feels like he doesn't know anything about you.
+character: Rei; text: But it seems to me that this is just a way to maintain my reputation as a serious and reliable person.
+character: Rei; text: But in fact, he is a kind and sympathetic person.
+character: Rei; text: That's why I'd like to get to know you better myself.
+character: Rei; text: I'm looking forward to our first mission.
+character: Misato; text: Well, that's great. I'm glad you got along.
+character: Misato; text: Ray is an experienced fighter, her Eva was the first. Although her performance on the synchronization test is slightly worse than Asuka's, she is not inferior to her in battle.
+character: Misato; text: Therefore, you can fully rely on her.
+character: Rei; text: Yeah..
+character: Misato; text: Ridzuko will tell you how to control the robot later.
+character: Misato; text: She may seem a little boring to you, but she's very kind at heart.
+character: Misato; text: Trust me, I've known her for years.
+character: Asuka; text: Yeah..
+character: Rei; text: Yeah..
+character: Misato; text: Well, the time has come for your first fight, the main thing is not to be afraid, we are all here nearby and we will immediately come to the rescue.
+character: Misato; text: Girls, you don't mind giving all the glory to our newcomer this time, do you?
+character: Asuka; text: Of course I don't mind, but the main thing is that he doesn't mess up any more.
+character: Misato; text: I didn't get it, Asuka, have you forgotten that this is your first fight?
+character: Asuka; text: But it's not! That's why I'm worried about Eve being pieced together later.
+character: Rei; text: And for some reason I'm sure that everything will be fine, so good luck to you!
 

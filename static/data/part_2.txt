@@ -1,0 +1,49 @@
+character: Misato; text: And great job again!
+character: Misato; text: And great job again!
+character: Misato; text: At this rate, you're going to replace me soon.
+character: Misato; text: And I would really not like that.
+character: Misato; text: You know, I'm a young girl. I need money, new clothes, and a car.
+character: Misato; text: But although if you agree to provide for me, I don't mind...
+character: Asuka; text: Well, it's started again.
+character: Asuka; text: Tell me honestly, Misato, do you care who you hit on?
+character: Asuka; text: Whether it's an old grandfather or an invalid, the main thing is to have money.
+character: Asuka; text: Well, if it's a big can of beer, then that's your benchmark.
+character: Misato; text: Well, you see, Asuka, we shouldn't be living together.
+character: Misato; text: Every day you get to know me better and better.
+character: Misato; text: You're hopeless.
+character: Rei; text: I congratulate you too!
+character: Rei; text: In fact, I thought everything was lost when I saw how you work at the beginning.
+character: Rei; text: But then you were replaced!
+character: Rei; text: I couldn't even keep up with the movements of your fingers.
+character: Rei; text: How did you train them interestingly?
+character: Asuka; text: . . .
+character: Rei; text: You must like computer games!
+character: Rei; text: There are also a lot of buttons to sort through and quickly respond to changes on the screen.
+character: Rei; text: Maybe you'll teach me one day?
+character: Misato; text: Let's change the subject.
+character: Misato; text: They predicted the arrival of a new Angel soon.
+character: Misato; text: And most likely it will be an order of magnitude stronger than all those that were before.
+character: Misato; text: Most likely, he won't be very agile, so you'll be able to attack him a couple of times between his attacks.
+character: Asuka; text: Well, that's it. The problem solved itself. I will defeat him in this period of time.
+character: Asuka; text: As always, nothing difficult for the great me.
+character: Misato; text: It would be so easy.
+character: Misato; text: This angel has an abnormally strong At field. We'll have to cut it up close.
+character: Rei; text: I can do it, after all, I have the most experience.
+character: Rei; text: And my Eva is the toughest, so just a little bit,
+character: Misato; text: I don't think that's going to happen.
+character: Misato; text: This Angel has such a ray that it will even cut through a mountain.
+character: Misato; text: We'd better put you in the role of a shield.
+character: Misato; text: You will protect the fastest of us.
+character: Asuka; text: Me!
+character: Misato; text: No!
+character: Misato; text: I'm sorry, Asuka, but when you're in a hurry, you get too clumsy.
+character: Misato; text: I would suggest our newcomer for this role.
+character: Misato; text: He performed pretty well in the first fight. So I think we can entrust the building to him.
+character: Rei; text: I agree, we are all convinced of his speed.
+character: Rei; text: And I will become your reliable shield.
+character: Asuka; text: What should I do?
+character: Asuka; text: Sitting flat on my butt again?
+character: Misato; text: No, Asuka, as the mark itself, you have the honor to shoot an Angel while our nimble friend breaks his field.
+character: Asuka; text: Well, I actually knew that I would get the most responsible. It couldn't be any other way.
+character: Misato; text: Well, then it's settled.
+character: Misato; text: Let's go!

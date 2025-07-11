@@ -1,13 +1,50 @@
-character: Asuka; text: And this weakling will be the pilot of Eva 01?
-character: Asuka; text: I hope you don't run and cry to daddy in battle.
-character: Misato; text: And this is Asuka.
-character: Misato; text: Welcome to Tokyo-3, new Evangelion pilot.
-character: Misato; text: My name is Misato, I will be your mentor.
-character: Misato; text: Let me introduce you to your partners.
-character: Misato; text: Meet Ray.
-character: Rei; text: Nice to meet you.
-character: Misato; text: An Eva is a biological robot (or "artificial human") created to protect humanity from the Angels in the anime Evangelion. Each Eva is controlled by a pilot who synchronizes with its consciousness, and possesses immense power.
-character: Misato; text: Angels are mysterious, hostile beings that attack humanity in an attempt to reach "Lilith" or "Adam" to trigger "Third Impact" and change the world. Each Angel is unique, has powerful abilities, and poses a serious threat, forcing humans to rely on the Evangelions for protection.
-character: Misato; text: We are now in Tokyo-3.
-character: Misato; text: Tokyo-3 is a purpose-built fortress city in Evangelion that serves as humanity's last bastion against the Angels. It is equipped with retractable buildings, defensive weapons, and serves as NERV's main base from which Evangelion pilots repel enemy attacks.
-
+character: Misato; text: I don't have the words. It was great for the first fight.
+character: Misato; text: I don't have the words. It was great for the first fight.
+character: Misato; text: Actually, I thought you couldn't handle it because it was a pretty strong opponent, but you surpassed all my expectations.
+character: Misato; text: I hope you continue in the same spirit.
+character: Asuka; text: Well, as for me, nothing unusual . . .
+character: Asuka; text: An ordinary angel, flying something, shooting something, nothing out of the ordinary.
+character: Asuka; text: Ray and I even tell jokes about them. Yes, Ray?
+character: Rei; text: No . . .
+character: Asuka; text: Sh*t
+character: Asuka; text: Well, that just proves that I'm the strongest and most useful here. Without me, everything would have fallen apart a long time ago.
+character: Asuka; text: So don't get cocky, Daddy's boy, I'll kick your ass on the next mission.
+character: Asuka; text: Then we'll see which one of us is better, although I already know the outcome.
+character: Rei; text: Shut your mouth, Asuka.
+character: Rei; text: While you were in the head dogma, you risked your life.
+character: Rei; text: You have no right to defame him.
+character: Asuka; text: . . .
+character: Rei; text: I think you're doing a great job.
+character: Rei; text: In your first battle, you didn't lose your head, you fought back against such a powerful opponent.
+character: Rei; text: Yes, of course there were times when you were a little bit wrong.
+character: Rei; text: For example, you could not let him get so close to you or use auto-guidance to pay more attention to pilating.
+character: Rei; text: But you're doing great!
+character: Rei; text: So now we all need to celebrate properly.
+character: Rei; text: And then I'll train you properly.
+character: Misato; text: Well said, Ray.
+character: Misato; text: And the offer is excellent. Where would you like to go celebrate?
+character: Asuka; text: Well, of course, to the mall, and I'd like to invite my friend Kaji.
+character: Misato; text: No way . . .
+character: Asuka; Boring girl.
+character: Misato; What about you, Ray?
+character: Rei; text: I don't really care. The main thing is that the person responsible for our celebration today should be happy.
+character: Misato; text: Well, that's great.
+character: Misato; text: And you, Asuka, should take an example from her, and not run after older guys.
+character: Misato; text: Well, then the choice is yours.
+character: Asuka; text: May he choose nothing.
+character: Asuka; text: And if he does, it won't be any more fun than painting at a table.
+character: Asuka; text: Well, or at least he wants to go to Daddy.
+character: Asuka; text: Who will safely ignore it.
+character: Rei; text: I'd like to visit Gendo.
+character: Rei; text: So if we go to him, then we'll come to visit you too.
+character: Misato; text: Well, actually, he's living with me and Asuka now.
+character: Rei; text: Why is that?
+character: Asuka; text: Because he's so annoying that even his father kicked him out.
+character: Asuka; text: I feel like we'll do the same soon.
+character: Misato; text: It's just that Gendo travels a lot now and doesn't have a permanent place of residence. And a teenager needs it.
+character: Misato; text: Ring... Ring... Ring...
+character: Rei; text: Who was it?
+character: Misato; text: Ridzuko said that NERV was attacked by an angel, and this time it was very unusual.
+character: Misato; text: It's in the form of a virus. Because of him, all Eves are not working, and the only way out is to enter the encryption keys as soon as possible.
+character: Misato; text: She's asking for your help.
+character: Misato; text: Let's hurry up!
