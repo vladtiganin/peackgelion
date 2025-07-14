@@ -17,7 +17,7 @@ pygame.mixer.init()
 info = pygame.display.Info()
 WIDTH, HEIGHT = info.current_w, info.current_h
 # WIDTH, HEIGHT = 800, 600
-window = pygame.display.set_mode((WIDTH, HEIGHT), pygame.FULLSCREEN)
+window = pygame.display.set_mode((WIDTH, HEIGHT))
 clock = pygame.time.Clock()
 FPS = 60
 
